@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 
@@ -19,11 +20,11 @@ public class CartController {
     }
 
     @PostMapping("/add-product")
-    public String addProduct(@RequestParam Integer quantity, @RequestParam Integer idProduct, @RequestParam String nameProduct,@RequestParam BigDecimal price){
-        System.out.println("HOLA");
+    public String addProduct(@RequestParam Integer quantity, @RequestParam Integer idProduct, @RequestParam String nameProduct,@RequestParam BigDecimal price, RedirectAttributes redirectAttrs){
         cartService.addItemCart(quantity, idProduct, nameProduct, price);
         showCart();
-        return "redirect:/home";
+        redirectAttrs.addFlashAttribute("added_product", "ok");
+        return "redirect:/home/product-detail/"+idProduct;
     }
 
     @GetMapping("/get-cart")

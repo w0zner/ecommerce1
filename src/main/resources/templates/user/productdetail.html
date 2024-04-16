@@ -34,12 +34,17 @@
       </h1>
 
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
         <li class="breadcrumb-item active">Producto</li>
       </ol>
 
       <!-- Blog Post -->
       <div class="card mb-4">
+        <div th:if="${added_product != null}" class="alert alert-info" role="alert">
+          <span> Producto agregado al carrito exitosamente! </span>
+          <br>
+          <a th:href="@{/home}" class="alert-link">Seguir comprando</a> o  <a th:href="@{/user/cart/get-cart}" class="alert-link">Ver Carrito</a>
+        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-lg-6">
