@@ -2,6 +2,7 @@ package com.icodeap.ecommerce.infrastructure.controller;
 
 import com.icodeap.ecommerce.application.service.*;
 import com.icodeap.ecommerce.domain.*;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,8 @@ public class OrderController {
     private final StockService stockService;
     private final ValidateStock validateStock;
 
+    private final Integer UNIT_IN = 0;
+
     public OrderController(CartService cartService, UserService userService, ProductService productService, OrderService orderService, OrderProductService orderProductService, StockService stockService, ValidateStock validateStock) {
         this.cartService = cartService;
         this.userService = userService;
@@ -36,8 +39,8 @@ public class OrderController {
     }
 
     @GetMapping("/sumary-order")
-    public String showSumaryOrder(Model model) {
-        User user = userService.findById(1);
+    public String showSumaryOrder(Model model, HttpSession session) {
+        User user = userService.findById(Integer.parseInt(session.getAttribute("iduser").toString()));
 
         List<ItemCart> items = cartService.getItemCarts();
         if(items.size() == 0){
@@ -52,10 +55,12 @@ public class OrderController {
     }
 
     @GetMapping("/create-order")
-    public String createOrder(RedirectAttributes redirectAttrs) {
+    public String createOrder(RedirectAttributes redirectAttrs, HttpSession session) {
         log.info("--Create Order--");
+        log.info("ID USER Obtenido desde la variable de sesion {}", Integer.parseInt(session.getAttribute("iduser").toString()));
+
         //Obtener usuario temporal
-        User user = userService.findById(1);
+        User user = userService.findById(Integer.parseInt(session.getAttribute("iduser").toString()));
 
         //Save order
         Order order = new Order();
@@ -76,7 +81,7 @@ public class OrderController {
                     stock.setDateCreated(LocalDateTime.now());
                     stock.setProduct(op.getProduct());
                     stock.setDescription("Venta");
-                    stock.setUnitIn(0);
+                    stock.setUnitIn(UNIT_IN);
                     stock.setUnitOut(op.getQuantity());
                     stockService.saveStock(validateStock.calculateBalance(stock));
                 }

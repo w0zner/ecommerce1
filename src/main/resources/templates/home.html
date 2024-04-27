@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -22,14 +22,16 @@
 <body>
 
 <!-- Navigation -->
-<div th:insert="~{user/template_user.html::header}"></div>
+<div th:insert="~{user/template_user.html::header}" th:if="${id==null}"></div>
+<div th:insert="~{user/template_user.html::userLogged}" th:unless="${id==null}"></div>
+
 
     <!-- Page Content -->
     <div class="container">
 
       <!-- Jumbotron Header -->
       <header class="jumbotron my-4">
-        <h1 class="display-3">Bienvenido a Spring Ecommerce 2023</h1>
+        <h1 class="display-3">Bienvenido a Spring Ecommerce</h1>
         <p class="lead">Tu tienda de productos en Línea</p>
       </header>
 

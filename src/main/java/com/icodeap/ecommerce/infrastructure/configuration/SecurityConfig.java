@@ -39,7 +39,12 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("USER")
                         .anyRequest().permitAll())
                 .formLogin(login -> login.loginPage("/login")
-                        .defaultSuccessUrl("/login")
+                        .defaultSuccessUrl("/login/access")
+                        .permitAll())
+                .logout(logout -> logout.invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/close")
                         .permitAll());
 
         return httpSecurity.build();

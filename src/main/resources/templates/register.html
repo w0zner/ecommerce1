@@ -33,7 +33,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login.html">Login</a>
+            <a class="nav-link" th:href="@{/login}">Login</a>
           </li>
         </ul>
       </div>    
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div class="alert alert-danger" th:text="${exito}" th:if="${exito}"></div>
+    <div class="alert alert-success" th:text="${exito}" th:if="${exito}"></div>
 
 	<form th:action="@{/register}" method="post" th:object="${userDto}">
       <div class="form-group">

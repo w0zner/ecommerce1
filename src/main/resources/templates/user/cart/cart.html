@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -22,7 +22,9 @@
 <body>
 
   <!-- Navigation -->
-  <div th:insert="~{user/template_user.html::header}"></div>
+  <div th:insert="~{user/template_user.html::userLogged}"></div>
+
+
 
     <!-- Page Content -->
     <div class="container">
@@ -90,8 +92,8 @@
     <div th:insert="~{user/template_user.html::footer}"></div>
 
     <!-- Bootstrap core JavaScript -->
-    <script th:src="@{vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
   </body>
 

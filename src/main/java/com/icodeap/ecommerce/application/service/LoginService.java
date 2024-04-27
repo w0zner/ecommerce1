@@ -30,13 +30,21 @@ public class LoginService {
         }
     }
 
-    public UserType getUserType(UserDto userDto) {
-            return userService.findByEmail(userDto.getEmail()).getUserType();
+    public UserType getUserType(String email) {
+            return userService.findByEmail(email).getUserType();
     }
 
     public User getUser(String email) {
         try{
             return userService.findByEmail(email);
+        }catch(Exception e){
+            return new User();
+        }
+    }
+
+    public User getUser(Integer id) {
+        try{
+            return userService.findById(id);
         }catch(Exception e){
             return new User();
         }

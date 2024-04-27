@@ -22,7 +22,8 @@
 <body>
 
 <!-- Navigation -->
-<div th:insert="~{user/template_user.html::header}"></div>
+<div th:insert="~{user/template_user.html::header}" th:if="${id==null}"></div>
+<div th:insert="~{user/template_user.html::userLogged}" th:unless="${id==null}"></div>
 
     <!-- Page Content -->
     <div class="container">
@@ -93,8 +94,8 @@
 <div th:insert="~{user/template_user.html::footer}"></div>
 
 <!-- Bootstrap core JavaScript -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
   </body>
 
