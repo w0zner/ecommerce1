@@ -28,6 +28,11 @@ public class AdminController {
         user.setId(Integer.parseInt(session.getAttribute("iduser").toString()));
         Iterable<Product> products = productService.getProductByUser(user);
 
+        if (session != null) {
+            model.addAttribute("id", session.getAttribute("iduser"));
+            model.addAttribute("usuario", session.getAttribute("usuario"));
+        }
+
         model.addAttribute("products", products);
         return "admin/home";
     }

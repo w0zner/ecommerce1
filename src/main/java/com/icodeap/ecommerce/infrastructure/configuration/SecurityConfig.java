@@ -1,6 +1,8 @@
 package com.icodeap.ecommerce.infrastructure.configuration;
 
+import com.icodeap.ecommerce.infrastructure.service.LoginHandler;
 import com.icodeap.ecommerce.infrastructure.service.UserDetailServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,6 +19,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     private final UserDetailServiceImpl userDetailService;
+
+    @Autowired
+    private LoginHandler loginHandler;
 
     public SecurityConfig(UserDetailServiceImpl userDetailService) {
         this.userDetailService = userDetailService;
@@ -39,7 +44,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("USER")
                         .anyRequest().permitAll())
                 .formLogin(login -> login.loginPage("/login")
-                        .defaultSuccessUrl("/login/access")
+                        .successHandler(loginHandler)
                         .permitAll())
                 .logout(logout -> logout.invalidateHttpSession(true)
                         .clearAuthentication(true)

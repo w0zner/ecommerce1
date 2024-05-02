@@ -41,7 +41,12 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
 
-            <div th:text="'Bienvenido '+ ${usuario}" class="alert alert-outline-info my-2 my-sm-0"> </div>
+            <!--           <a href="#" class="badge badge-success mt-3 mb-1 p-2" style="float: right" th:unless="${usuario == null}">
+                           <div th:text="'Bienvenido '+ ${usuario}"> </div>
+                       </a>
+                       <div th:unless="${usuario == null}"  style="float: right">
+                           <div th:text="'Bienvenido '+ ${usuario}" class="alert alert-light my-2 my-sm-0"> </div>
+                       </div>-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -56,7 +61,7 @@
                         <div class="dropdown-menu"
                              aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" th:href="@{/user/cart/get-cart}">Carrito</a>
-                            <a class="dropdown-item" href="">Compras</a>
+                            <a class="dropdown-item" th:href="@{/user/cart/shopping}">Compras</a>
                             <a class="dropdown-item" th:href="@{/logout}">Salir</a>
                         </div>
 

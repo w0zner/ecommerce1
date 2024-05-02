@@ -39,7 +39,7 @@ public class LoginController {
                 return "redirect:/admin";
             } else {
                 redirectAttributes.addFlashAttribute("id", session.getAttribute("iduser").toString());
-                redirectAttributes.addFlashAttribute("usuario", user.getUsername());
+                redirectAttributes.addFlashAttribute("usuario", session.getAttribute("usuario"));
                 return "redirect:/home";
             }
         }

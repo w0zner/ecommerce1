@@ -30,6 +30,7 @@ public class HomeController {
     public String home(Model model, HttpSession session){
         if (session != null) {
             model.addAttribute("id", session.getAttribute("iduser"));
+            model.addAttribute("usuario", session.getAttribute("usuario"));
         }
         model.addAttribute("products", productService.getProducts());
         return "home";
@@ -49,6 +50,7 @@ public class HomeController {
         model.addAttribute("stock", lastBalance);
         if (session != null) {
             model.addAttribute("id", session.getAttribute("iduser"));
+            model.addAttribute("userType", session.getAttribute("userType"));
         }
 
         return "user/productdetail.html";
